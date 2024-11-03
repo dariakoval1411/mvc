@@ -1,0 +1,11 @@
+<div class="container">
+    <h2>Calculator</h2>
+    <form (ngSubmit)="onCalculate()">
+        <input type="number" [(ngModel)]="num1" name="num1" placeholder="Number 1" required>
+        <input type="number" [(ngModel)]="num2" name="num2" placeholder="Number 2" required>
+        <button type="button" (click)="onCalculate()">Calculate</button>
+    </form>
+    <div *ngIf="result !== null">
+        <p>Result: {{ result }}</p>
+    </div>
+</div>

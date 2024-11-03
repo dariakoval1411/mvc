@@ -1,0 +1,16 @@
+<div class="quotes-container">
+    <h2>Favorite Quote</h2>
+
+    <div class="quote-form">
+        <input type="text" [(ngModel)]="newQuote" placeholder="Add new quote" />
+        <button (click)="addQuote()">Add</button>
+    </div>
+
+    <ul>
+        <li *ngFor="let quote of quotes; let i = index" class="quote-item">
+            <span>{{ quote }}</span>
+            <button (click)="editQuote(i)">Edit</button>
+            <button (click)="deleteQuote(i)">Delete</button>
+        </li>
+    </ul>
+</div>
