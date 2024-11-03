@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+
+	<parent>
+		<groupId>pl.pw.daria.mvc</groupId>
+		<artifactId>mvc-parent</artifactId>
+		<version>0.0.1-SNAPSHOT</version>
+		<relativePath>../</relativePath>
+	</parent>
+	<artifactId>jpa-model</artifactId>
+
+    <properties>
+        <jakarta.persistence.version>3.0.0</jakarta.persistence.version>
+        <hibernate.core.version>5.3.28.Final</hibernate.core.version>
+        <jakarta.annotation.version>2.0.0</jakarta.annotation.version>
+        <jackson.annotations.version>2.12.7</jackson.annotations.version>
+        <hibernate.jpamodelgen.version>6.0.2.Final</hibernate.jpamodelgen.version>
+    </properties>
+
+
+	<dependencies>
+		<dependency>
+			<groupId>jakarta.persistence</groupId>
+			<artifactId>jakarta.persistence-api</artifactId>
+			<version>${jakarta.persistence.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.hibernate</groupId>
+			<artifactId>hibernate-core</artifactId>
+			<version>${hibernate.core.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>jakarta.annotation</groupId>
+			<artifactId>jakarta.annotation-api</artifactId>
+            <version>${jakarta.annotation.version}</version>
+		</dependency>
+        <dependency>
+            <groupId>com.fasterxml.jackson.core</groupId>
+            <artifactId>jackson-annotations</artifactId>
+            <version>${jackson.annotations.version}</version>
+        </dependency>
+	    <dependency>
+	      <groupId>org.hibernate.orm</groupId>
+	      <artifactId>hibernate-jpamodelgen</artifactId>
+	      <version>${hibernate.jpamodelgen.version}</version>
+	    </dependency>       
+	</dependencies>
+</project>

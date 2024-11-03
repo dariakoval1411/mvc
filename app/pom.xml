@@ -19,6 +19,11 @@
 			<artifactId>api-ui</artifactId>
 			<type>war</type>
 		</dependency>
+		<dependency>
+			<groupId>pl.pw.daria.mvc</groupId>
+			<artifactId>ejb</artifactId>
+			<type>ejb</type>
+		</dependency>
 	</dependencies>
 
 	<build>
@@ -40,6 +45,10 @@
 						  <contextRoot>/</contextRoot>
 						</webModule>
 					</modules>
+					<ejbModule>
+							<groupId>pl.pw.daria.mvc</groupId>
+							<artifactId>ejb</artifactId>
+					</ejbModule>	
 				</configuration>
 			</plugin>
 		</plugins>

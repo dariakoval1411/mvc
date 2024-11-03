@@ -25,6 +25,8 @@
 		<module>api-ui</module>
 		<module>app</module>
 		<module>ui</module>
+		<module>ejb</module>
+		<module>jpa-model</module>
 	</modules>
 
 	<dependencyManagement>
@@ -46,6 +48,17 @@
 				<artifactId>ui</artifactId>
 				<version>${project.version}</version>
 				<type>zip</type>
+			</dependency>
+			<dependency>
+				<groupId>pl.pw.daria.mvc</groupId>
+				<artifactId>ejb</artifactId>
+				<version>${project.version}</version>
+				<type>ejb</type>
+			</dependency>
+			<dependency>
+				<groupId>pl.pw.daria.mvc</groupId>
+				<artifactId>jpa-model</artifactId>
+				<version>${project.version}</version>
 			</dependency>
 		</dependencies>
 	</dependencyManagement>
