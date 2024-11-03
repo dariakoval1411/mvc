@@ -1,0 +1,119 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+
+	<groupId>pl.pw.daria.mvc</groupId>
+	<version>0.0.1-SNAPSHOT</version>
+
+	<artifactId>mvc-parent</artifactId>
+	<packaging>pom</packaging>
+
+	<properties>
+		<platform.version>1.0.7-SNAPSHOT</platform.version>
+		<jakarta.annotation.version>2.1.1</jakarta.annotation.version>
+		<jakarta.inject.version>2.0.1</jakarta.inject.version>
+		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+		<build.qualifier>/local</build.qualifier>
+		<build.tag>latest</build.tag>
+		<build.configuration>development</build.configuration>
+	</properties>
+
+	<modules>
+		<module>api-ui</module>
+		<module>app</module>
+		<module>ui</module>
+	</modules>
+
+	<dependencyManagement>
+		<dependencies>
+			<dependency>
+				<groupId>pl.pw.daria.mvc</groupId>
+				<artifactId>api-ui</artifactId>
+				<type>war</type>
+				<version>${project.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>pl.pw.daria.mvc</groupId>
+				<artifactId>app</artifactId>
+				<type>ear</type>
+				<version>${project.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>pl.pw.daria.mvc</groupId>
+				<artifactId>ui</artifactId>
+				<version>${project.version}</version>
+				<type>zip</type>
+			</dependency>
+		</dependencies>
+	</dependencyManagement>
+
+	<dependencies>
+		<dependency>
+			<groupId>jakarta.annotation</groupId>
+			<artifactId>jakarta.annotation-api</artifactId>
+			<version>${jakarta.annotation.version}</version>
+			<scope>provided</scope>
+		</dependency>
+		<dependency>
+			<groupId>jakarta.inject</groupId>
+			<artifactId>jakarta.inject-api</artifactId>
+			<version>${jakarta.inject.version}</version>
+			<scope>provided</scope>
+		</dependency>
+	</dependencies>
+
+	<build>
+		<pluginManagement>
+			<plugins>
+				<plugin>
+					<artifactId>maven-clean-plugin</artifactId>
+					<version>3.1.0</version>
+				</plugin>
+				<plugin>
+					<artifactId>maven-resources-plugin</artifactId>
+					<version>3.0.2</version>
+				</plugin>
+				<plugin>
+					<groupId>org.apache.maven.plugins</groupId>
+					<artifactId>maven-compiler-plugin</artifactId>
+					<version>3.12.1</version>
+					<configuration>
+						<release>21</release>
+					</configuration>
+				</plugin>
+				<plugin>
+					<artifactId>maven-surefire-plugin</artifactId>
+					<version>2.22.1</version>
+				</plugin>
+				<plugin>
+					<artifactId>maven-jar-plugin</artifactId>
+					<version>3.0.2</version>
+				</plugin>
+				<plugin>
+					<artifactId>maven-install-plugin</artifactId>
+					<version>2.5.2</version>
+				</plugin>
+				<plugin>
+					<artifactId>maven-deploy-plugin</artifactId>
+					<version>2.8.2</version>
+				</plugin>
+				<plugin>
+					<artifactId>maven-site-plugin</artifactId>
+					<version>3.7.1</version>
+				</plugin>
+				<plugin>
+					<artifactId>maven-project-info-reports-plugin</artifactId>
+					<version>3.0.0</version>
+				</plugin>
+				<plugin>
+					<groupId>com.github.eirslett</groupId>
+					<artifactId>frontend-maven-plugin</artifactId>
+					<version>1.12.0</version>
+				</plugin>
+			</plugins>
+		</pluginManagement>
+	</build>
+</project>

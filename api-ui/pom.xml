@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+
+	<parent>
+		<groupId>pl.pw.daria.mvc</groupId>
+		<artifactId>mvc-parent</artifactId>
+		<version>0.0.1-SNAPSHOT</version>
+		<relativePath>../</relativePath>
+	</parent>
+
+	<artifactId>api-ui</artifactId>
+	<packaging>war</packaging>
+
+	<properties>
+		<jakarta.ws.rs.version>3.1.0</jakarta.ws.rs.version>
+		<jakarta.validation.version>3.0.2</jakarta.validation.version>
+		<jackson.databind.version>2.15.4</jackson.databind.version>
+		<jakarta.servlet.version>5.0.0</jakarta.servlet.version>
+		<jakarta.json.bind.version>3.0.0</jakarta.json.bind.version>
+	</properties>
+
+	<dependencies>
+		<!-- jakarta EE -->
+		<dependency>
+			<groupId>jakarta.ws.rs</groupId>
+			<artifactId>jakarta.ws.rs-api</artifactId>
+			<version>${jakarta.ws.rs.version}</version>
+			<scope>provided</scope>
+		</dependency>
+		<dependency>
+			<groupId>jakarta.validation</groupId>
+			<artifactId>jakarta.validation-api</artifactId>
+			<version>${jakarta.validation.version}</version>
+			<scope>provided</scope>
+		</dependency>
+		<dependency>
+			<groupId>jakarta.servlet</groupId>
+			<artifactId>jakarta.servlet-api</artifactId>
+			<version>${jakarta.servlet.version}</version>
+			<scope>provided</scope>
+		</dependency>
+		<dependency>
+			<groupId>jakarta.json.bind</groupId>
+			<artifactId>jakarta.json.bind-api</artifactId>
+			<version>${jakarta.json.bind.version}</version>
+		</dependency>
+		<!-- Wildfly platform -->
+		<dependency>
+			<groupId>com.fasterxml.jackson.core</groupId>
+			<artifactId>jackson-databind</artifactId>
+			<version>${jackson.databind.version}</version>
+			<scope>provided</scope>
+		</dependency>
+		<!-- modules -->
+		<dependency>
+			<groupId>pl.pw.daria.mvc</groupId>
+			<artifactId>ui</artifactId>
+			<type>zip</type>
+		</dependency>
+	</dependencies>
+
+	<build>
+		<finalName>api-ui</finalName>
+		<plugins>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-war-plugin</artifactId>
+				<version>3.4.0</version>
+				<configuration>
+					<failOnMissingWebXml>false</failOnMissingWebXml>
+					<overlays>
+						<overlay>
+							<groupId>pl.pw.daria.mvc</groupId>
+							<artifactId>ui</artifactId>
+							<type>zip</type>
+						</overlay>
+					</overlays>
+				</configuration>
+			</plugin>
+		</plugins>
+	</build>
+</project>
