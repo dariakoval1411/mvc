@@ -1,5 +1,6 @@
 package pl.pw.mvc.accounting;
 
+import java.math.BigDecimal;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -72,8 +73,8 @@ public class CustomerServiceImpl {
 	}
 
 	@TransactionAttribute(TransactionAttributeType.REQUIRED)
-	public void updateCustomer(Long id,CustomerDTO dto) throws Exception {
-		Customer customer = entityManager.find(Customer.class,id);
+	public void updateCustomer(Long id, CustomerDTO dto) throws Exception {
+		Customer customer = entityManager.find(Customer.class, id);
 		if (customer != null) {
 			customer.setName(dto.getName());
 			customer.setCity(dto.getCity());
@@ -86,17 +87,33 @@ public class CustomerServiceImpl {
 			throw new Exception("Customer not found with id: " + dto.getId());
 		}
 	}
-	
+
 	@TransactionAttribute(TransactionAttributeType.REQUIRED)
 	public void createCustomer(CustomerDTO dto) throws Exception {
-	    Customer customer = new Customer();
-	    customer.setName(dto.getName());
-	    customer.setCity(dto.getCity());
-	    customer.setNip(dto.getNip());
-	    customer.setZipCode(dto.getZipCode());
-	    customer.setStreet(dto.getStreet());
+		Customer customer = new Customer();
+		customer.setName(dto.getName());
+		customer.setCity(dto.getCity());
+		customer.setNip(dto.getNip());
+		customer.setZipCode(dto.getZipCode());
+		customer.setStreet(dto.getStreet());
 
-	    entityManager.persist(customer);
+		entityManager.persist(customer);
 	}
 
+	@TransactionAttribute(TransactionAttributeType.REQUIRED)
+	public Map<Integer, BigDecimal> getSalesByMonth() {
+		List<Object[]> results = entityManager.createQuery("SELECT EXTRACT(MONTH FROM i.issueDate), SUM(i.grossPrice) "
+				+ "FROM Invoice i GROUP BY EXTRACT(MONTH FROM i.issueDate)", Object[].class).getResultList();
+
+		return results.stream().collect(Collectors.toMap(r -> ((Number) r[0]).intValue(), r -> (BigDecimal) r[1]));
+	}
+
+	@TransactionAttribute(TransactionAttributeType.REQUIRED)
+	public Map<String, BigDecimal> getTotalSalesByCustomer() {
+		List<Object[]> results = entityManager.createQuery(
+				"SELECT c.name, SUM(i.grossPrice) " + "FROM Invoice i JOIN i.customer c " + "GROUP BY c.name",
+				Object[].class).getResultList();
+
+		return results.stream().collect(Collectors.toMap(r -> (String) r[0], r -> (BigDecimal) r[1]));
+	}
 }

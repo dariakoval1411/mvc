@@ -1,5 +1,8 @@
 package accounting;
 
+import java.math.BigDecimal;
+import java.util.Map;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -85,6 +88,34 @@ public class AccountingEndpoint {
 		} catch (Exception e) {
 			LOG.error("Adding Customer failed", e);
 			return Response.status(Response.Status.INTERNAL_SERVER_ERROR).entity("Failed to add customer").build();
+		}
+	}
+
+	@GET
+	@Path("/reports/salesByMonth")
+	@Produces(MediaType.APPLICATION_JSON)
+	public Response getSalesByMonth() {
+		try {
+			Map<Integer, BigDecimal> salesByMonth = customerService.getSalesByMonth();
+			return Response.ok(salesByMonth).build();
+		} catch (Exception e) {
+			LOG.error("Failed to retrieve sales by month", e);
+			return Response.status(Response.Status.INTERNAL_SERVER_ERROR).entity("Failed to retrieve sales data")
+					.build();
+		}
+	}
+
+	@GET
+	@Path("/reports/totalSalesByCustomer")
+	@Produces(MediaType.APPLICATION_JSON)
+	public Response getTotalSalesByCustomer() {
+		try {
+			Map<String, BigDecimal> salesData = customerService.getTotalSalesByCustomer();
+			return Response.ok(salesData).build();
+		} catch (Exception e) {
+			e.printStackTrace();
+			return Response.status(Response.Status.INTERNAL_SERVER_ERROR)
+					.entity("Failed to retrieve total sales by customer").build();
 		}
 	}
 }

@@ -61,4 +61,14 @@ export class AppService {
     public addCustomer(customer: CustomerDTO) : Observable<CustomerDTO> {
         return this.httpClient.post<CustomerDTO>(`api/ac`, customer);
     }
+
+
+    //Invoices
+    public getSalesByMonth(): Observable<{ [month: number]: any }> {
+        return this.httpClient.get<{ [month: number]: any }>(`/api/ac/reports/salesByMonth`);
+    }
+
+    public getTotalSalesByCustomer(): Observable<{ [name: string]: any }> {
+        return this.httpClient.get<{ [name: string]: any }>(`/api/ac/reports/totalSalesByCustomer`);
+    }
 }
