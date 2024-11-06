@@ -1,0 +1,12 @@
+<mat-nav-list>
+  <div *ngFor="let section of menu; let i = index">
+    <ng-container *ngFor="let item of section.items">
+      <button mat-list-item [routerLink]="item.link" routerLinkActive="active"
+        [routerLinkActiveOptions]="{ exact: true }" (click)="clickLink()">
+        <div class="flex items-center">
+          <mat-icon class="m-3">{{ item.icon }}</mat-icon>{{ item.title }}
+        </div>
+      </button>
+    </ng-container>
+  </div>
+</mat-nav-list>

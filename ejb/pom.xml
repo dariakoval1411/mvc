@@ -36,6 +36,10 @@
 
 	<dependencies>
 		<dependency>
+			<groupId>pl.pw.daria.mvc</groupId>
+			<artifactId>jpa-model</artifactId>
+		</dependency>
+		<dependency>
 			<groupId>jakarta.inject</groupId>
 			<artifactId>jakarta.inject-api</artifactId>
 			<version>${jakarta.inject.version}</version>

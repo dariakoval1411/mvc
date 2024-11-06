@@ -1,4 +1,4 @@
-.container {
+/* .container {
     max-width: 600px;
     margin: 0 auto;
     padding: 20px;
@@ -88,4 +88,18 @@ li:hover {
 
 .task-item button:hover {
     background-color: #c82333;
-}
+} */
+
+/* html, body { height: 100%; }
+body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; } */
+@use '@angular/material' as mat;
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@include mat.core();
+
+html, body { height: 100%; }
+body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+

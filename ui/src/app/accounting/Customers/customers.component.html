@@ -1,0 +1,114 @@
+<mat-table [dataSource]="dataSource" matSort (matSortChange)="applySortChange($event)" class="mat-elevation-z8">
+
+    <ng-container matColumnDef="id">
+        <mat-header-cell *matHeaderCellDef mat-sort-header> ID </mat-header-cell>
+        <mat-cell *matCellDef="let element"> {{element.id}} </mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="name">
+        <mat-header-cell *matHeaderCellDef>
+            <div class="header-filter">
+                Name
+                <mat-form-field appearance="fill">
+                    <input matInput (input)="applyFilter('name', $event)" placeholder="Filter by Name">
+                </mat-form-field>
+            </div>
+        </mat-header-cell>
+        <mat-cell *matCellDef="let element"> {{element.name}} </mat-cell>
+    </ng-container>
+
+
+    <ng-container matColumnDef="city">
+        <mat-header-cell *matHeaderCellDef>
+            <div class="header-filter">
+                City
+                <mat-form-field appearance="fill">
+                    <input matInput (input)="applyFilter('city', $event)" placeholder="Filter by City">
+                </mat-form-field>
+            </div>
+        </mat-header-cell>
+        <mat-cell *matCellDef="let element"> {{element.city}} </mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="nip">
+        <mat-header-cell *matHeaderCellDef>
+            <div class="header-filter">
+                NIP
+                <mat-form-field appearance="fill">
+                    <input matInput (input)="applyFilter('nip', $event)" placeholder="Filter by NIP">
+                </mat-form-field>
+            </div>
+        </mat-header-cell>
+        <mat-cell *matCellDef="let element"> {{element.nip}} </mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="zipCode">
+        <mat-header-cell *matHeaderCellDef>
+            <div class="header-filter">
+                Zip Code
+                <mat-form-field appearance="fill">
+                    <input matInput (input)="applyFilter('zipCode', $event)" placeholder="Filter by Zip Code">
+                </mat-form-field>
+            </div>
+        </mat-header-cell>
+        <mat-cell *matCellDef="let element"> {{element.zipCode}} </mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="street">
+        <mat-header-cell *matHeaderCellDef mat-sort-header> Street </mat-header-cell>
+        <mat-cell *matCellDef="let element"> {{element.street}} </mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="operations">
+        <mat-header-cell *matHeaderCellDef> Operations </mat-header-cell>
+        <mat-cell *matCellDef="let element">
+            <button mat-icon-button (click)="openEditDialog(element)" matTooltip="Edit">
+                <mat-icon>edit</mat-icon>
+            </button>
+            <button mat-icon-button (click)="deleteCustomer(element.id)" matTooltip="Delete">
+                <mat-icon>delete</mat-icon>
+            </button>
+        </mat-cell>
+    </ng-container>
+
+
+
+    <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+    <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+</mat-table>
+
+<mat-paginator [pageSizeOptions]="[5, 10, 20]" [pageSize]="10" showFirstLastButtons></mat-paginator>
+
+<button mat-raised-button color="primary" (click)="openAddDialog()">Add Customer</button>
+
+<ng-template #editDialog let-data>
+    <mat-dialog-title>{{ data.id ? 'Edit' : 'Add' }} Customer</mat-dialog-title>
+    <mat-dialog-content>
+    <form [formGroup]="editForm">
+        <mat-form-field appearance="fill">
+            <input matInput formControlName="name" placeholder="Name">
+            <mat-error *ngIf="editForm.get('name')?.hasError('required')">Name is required</mat-error>
+        </mat-form-field>
+        <mat-form-field appearance="fill">
+            <input matInput formControlName="city" placeholder="City">
+            <mat-error *ngIf="editForm.get('city')?.hasError('required')">City is required</mat-error>
+        </mat-form-field>
+        <mat-form-field appearance="fill">
+            <input matInput formControlName="nip" placeholder="NIP">
+            <mat-error *ngIf="editForm.get('nip')?.hasError('required')">NIP is required</mat-error>
+        </mat-form-field>
+        <mat-form-field appearance="fill">
+            <input matInput formControlName="zipCode" placeholder="zipCode">
+            <mat-error *ngIf="editForm.get('zipCode')?.hasError('required')">ZipCode is required</mat-error>
+        </mat-form-field>
+        <mat-form-field appearance="fill">
+            <input matInput formControlName="street" placeholder="street">
+            <mat-error *ngIf="editForm.get('street')?.hasError('required')">Street is required</mat-error>
+        </mat-form-field>
+    </form>
+    <mat-dialog-actions>
+        <button mat-stroked-button mat-dialog-close>Cancel</button>
+        <button mat-flat-button (click)="saveEdit()" color="primary">Save</button>
+    </mat-dialog-actions>
+</mat-dialog-content>
+</ng-template>

@@ -19,32 +19,31 @@
         <hibernate.jpamodelgen.version>6.0.2.Final</hibernate.jpamodelgen.version>
     </properties>
 
-
 	<dependencies>
 		<dependency>
 			<groupId>jakarta.persistence</groupId>
 			<artifactId>jakarta.persistence-api</artifactId>
 			<version>${jakarta.persistence.version}</version>
 		</dependency>
-		<dependency>
+		 <!--<dependency>
 			<groupId>org.hibernate</groupId>
 			<artifactId>hibernate-core</artifactId>
 			<version>${hibernate.core.version}</version>
-		</dependency>
+		</dependency> --> 
 		<dependency>
 			<groupId>jakarta.annotation</groupId>
 			<artifactId>jakarta.annotation-api</artifactId>
             <version>${jakarta.annotation.version}</version>
 		</dependency>
-        <dependency>
+        <!-- <dependency>
             <groupId>com.fasterxml.jackson.core</groupId>
             <artifactId>jackson-annotations</artifactId>
             <version>${jackson.annotations.version}</version>
-        </dependency>
+        </dependency> 
 	    <dependency>
 	      <groupId>org.hibernate.orm</groupId>
 	      <artifactId>hibernate-jpamodelgen</artifactId>
 	      <version>${hibernate.jpamodelgen.version}</version>
-	    </dependency>       
+	    </dependency>  -->     
 	</dependencies>
 </project>

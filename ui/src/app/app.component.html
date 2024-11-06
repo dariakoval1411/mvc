@@ -1,6 +1,19 @@
-<nav>
-    <a routerLink="/calculate">Calculator</a> |
-    <a routerLink="/to-do-list">Todo List</a> |
-    <a routerLink="/quotes">Quotes</a> 
-  </nav>
-<router-outlet></router-outlet>
+<mat-sidenav-container class="example-container mat-typography">
+  <mat-sidenav #drawer mode="side" disableClose="true">
+    <ada-menu-side (closeSideNav)="drawer.close()"></ada-menu-side>
+  </mat-sidenav>
+  <mat-sidenav-content>
+    <div class="main-content">
+      <mat-toolbar class="border-y-4 border-grey-500">
+        <button type="button" mat-icon-button style="margin-right: 10px;" (click)="drawer.toggle()"
+          [disableRipple]="true" aria-label="Toggle Sidenav">
+          <mat-icon>menu</mat-icon>
+        </button>
+        <div>
+          <ada-menu-breadcrumb></ada-menu-breadcrumb>
+        </div>
+      </mat-toolbar>
+      <router-outlet></router-outlet>
+    </div>
+  </mat-sidenav-content>
+</mat-sidenav-container>
