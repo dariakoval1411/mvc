@@ -12,11 +12,6 @@ export const routes: Routes = [
     component: CustomersComponent,
   },
   {
-    path: 'invoices',
-    data: { title: 'Invoices', icon: 'receipt' },
-    component: InvoicesComponent,
-  },
-  {
     path: 'charts',
     data: { title: 'Charts', icon: 'bar_chart' },
     component: ChartsComponent,
