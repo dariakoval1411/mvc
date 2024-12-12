@@ -59,6 +59,18 @@
 			<artifactId>jakarta.json.bind-api</artifactId>
 			<version>${jakarta.json.bind.version}</version>
 		</dependency>
+		<dependency>
+			<groupId>jakarta.websocket</groupId>
+			<artifactId>jakarta.websocket-api</artifactId>
+			<version>2.1.0</version>
+			<scope>provided</scope>
+		</dependency>
+		<dependency>
+			<groupId>jakarta.websocket</groupId>
+			<artifactId>jakarta.websocket-client-api</artifactId>
+			<version>2.1.0</version>
+			<scope>provided</scope>
+		</dependency>
 		<!-- Wildfly platform -->
 		<dependency>
 			<groupId>com.fasterxml.jackson.core</groupId>
@@ -67,11 +79,6 @@
 			<scope>provided</scope>
 		</dependency>
 		<!-- modules -->
-		<dependency>
-			<groupId>pl.pw.daria.mvc</groupId>
-			<artifactId>ui</artifactId>
-			<type>zip</type>
-		</dependency>
 	</dependencies>
 
 	<build>

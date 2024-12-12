@@ -1,6 +1,6 @@
 import { AfterViewInit, Component, OnInit, TemplateRef, ViewChild } from "@angular/core";
 import { MatTableDataSource } from "@angular/material/table";
-import { CustomerDTO } from "../../app.model";
+import { CustomerDTO,InvoiceDTO } from "../../app.model";
 import { AppService } from "../../app.service";
 import { MatSort, Sort } from "@angular/material/sort";
 import { MatPaginator } from "@angular/material/paginator";
@@ -15,7 +15,9 @@ import { FormBuilder, FormGroup, Validators } from "@angular/forms";
 })
 export class CustomersComponent implements OnInit, AfterViewInit {
     displayedColumns: string[] = ['id', 'name', 'city', 'nip', 'zipCode', 'street', 'operations'];
+    invoiceColumns: string[] = ['id', 'invoiceNumber', 'issueDate', 'dueDate', 'grossPrice', 'paymentDate','paymentStatus'];
     dataSource: MatTableDataSource<CustomerDTO> = new MatTableDataSource();
+    invoices: InvoiceDTO[] = [];
     total: number = 0;
     selectedCustomerId: number | null = null;
     private dialogRef: MatDialogRef<any> | null = null;
@@ -31,6 +33,7 @@ export class CustomersComponent implements OnInit, AfterViewInit {
     @ViewChild(MatPaginator) paginator!: MatPaginator;
     @ViewChild(MatSort) sort!: MatSort;
     @ViewChild('editDialog') editDialog!: TemplateRef<any>;
+    @ViewChild('invoicesDialog') invoicesDialog!: TemplateRef<any>;
 
     editForm: FormGroup;
     addForm: FormGroup;
@@ -175,6 +178,18 @@ export class CustomersComponent implements OnInit, AfterViewInit {
             }
         }, error => {
             console.error('Error adding customer', error);
+        });
+    }
+
+    openInvoicesDialog(customerId: number): void {
+        this.appService.getInvoicesByCustomerId(customerId).subscribe(invoices => {
+            this.invoices = invoices;
+
+            this.dialogRef = this.dialog.open(this.invoicesDialog, {
+                width: '800px'
+            });
+        }, error => {
+            console.error('Failed to load invoices', error);
         });
     }
 }

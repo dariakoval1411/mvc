@@ -1,24 +1,33 @@
-package pl.pw.mvc.entity;
+package pl.pw.mvc.model;
 
 import java.io.Serializable;
-import jakarta.persistence.*;
 import java.util.List;
 
+import jakarta.persistence.CascadeType;
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import jakarta.persistence.NamedQuery;
+import jakarta.persistence.OneToMany;
+import jakarta.persistence.SequenceGenerator;
+import jakarta.persistence.Table;
 
 /**
  * The persistent class for the customers database table.
  * 
  */
 @Entity
-@Table(name="customers")
-@NamedQuery(name="Customer.findAll", query="SELECT c FROM Customer c")
-@NamedQuery(name="Customer.findByName", query="SELECT c FROM Customer c where c.name = :name")
+@Table(name = "customers")
+@NamedQuery(name = "Customer.findAll", query = "SELECT c FROM Customer c")
+@NamedQuery(name = "Customer.findByName", query = "SELECT c FROM Customer c where c.name = :name")
 public class Customer implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Id
 	@SequenceGenerator(name = "CUSTOMERS_ID_GENERATOR", sequenceName = "CUSTOMERS_SEQ", allocationSize = 1)
-    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "CUSTOMERS_ID_GENERATOR")
+	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "CUSTOMERS_ID_GENERATOR")
 	private long id;
 
 	private String city;
@@ -29,8 +38,11 @@ public class Customer implements Serializable {
 
 	private String street;
 
-	@Column(name="zip_code")
+	@Column(name = "zip_code")
 	private String zipCode;
+
+	@OneToMany(mappedBy = "customer", cascade = CascadeType.ALL, orphanRemoval = true)
+	private List<Invoice> invoices;
 
 	public Customer() {
 	}
@@ -82,4 +94,5 @@ public class Customer implements Serializable {
 	public void setZipCode(String zipCode) {
 		this.zipCode = zipCode;
 	}
+
 }

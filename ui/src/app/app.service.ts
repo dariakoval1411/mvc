@@ -1,7 +1,7 @@
 import { HttpClient, HttpParams } from "@angular/common/http";
 import { inject, Injectable } from "@angular/core";
 import { Observable } from "rxjs";
-import { CustomerDTO, ResultsPage, ToDoItem } from "./app.model";
+import { CustomerDTO, InvoiceDTO, PaymentsDTO, ResultsPage, ToDoItem } from "./app.model";
 
 @Injectable({
     providedIn: 'root',
@@ -9,28 +9,6 @@ import { CustomerDTO, ResultsPage, ToDoItem } from "./app.model";
 
 export class AppService {
     private httpClient = inject(HttpClient);
-
-    //Calculte 
-    public calculateSum(num1: number, num2: number): Observable<number> {
-        return this.httpClient.get<number>(`api-ui/api/calculate?number1=${num1}&number2=${num2}`);
-    }
-
-    //ToDoList
-    public getToDoList(): Observable<ToDoItem[]> {
-        return this.httpClient.get<ToDoItem[]>(`api-ui/api/todo`);
-    }
-
-    public addToDo(task: ToDoItem): Observable<ToDoItem> {
-        return this.httpClient.post<ToDoItem>(`api-ui/api/todo`, task);
-    }
-
-    public deleteToDoItem(id: number): Observable<void> {
-        return this.httpClient.delete<void>(`api-ui/api/todo/${id}`);
-    }
-
-    public updateToDoItem(id: number, task: ToDoItem): Observable<ToDoItem> {
-        return this.httpClient.put<ToDoItem>(`api-ui/api/todo/${id}`, task);
-    }
 
     public findCustomers( id?: number,city?: string,name?: string,nip?: string,zipCode?: string,orderBy: string = 'id',
         offset: number = 0,
@@ -61,8 +39,6 @@ export class AppService {
     public addCustomer(customer: CustomerDTO) : Observable<CustomerDTO> {
         return this.httpClient.post<CustomerDTO>(`api/ac`, customer);
     }
-
-
     //Invoices
     public getSalesByMonth(): Observable<{ [month: number]: any }> {
         return this.httpClient.get<{ [month: number]: any }>(`/api/ac/reports/salesByMonth`);
@@ -70,5 +46,15 @@ export class AppService {
 
     public getTotalSalesByCustomer(): Observable<{ [name: string]: any }> {
         return this.httpClient.get<{ [name: string]: any }>(`/api/ac/reports/totalSalesByCustomer`);
+    }
+
+    public getInvoicesByCustomerId(customerId: number): Observable<InvoiceDTO[]>{
+        return this.httpClient.get<InvoiceDTO[]>(`/api/ac/customers/${customerId}/invoices`);
+    }
+    getListPyaments():Observable<PaymentsDTO[]>{
+        return this.httpClient.get<PaymentsDTO[]>(`/api/fi`);
+    }
+    updatePayment(paymentId: number, payment: Partial<PaymentsDTO>): Observable<void>{
+        return this.httpClient.put<void>(`/api/fi/${paymentId}`, payment);
     }
 }

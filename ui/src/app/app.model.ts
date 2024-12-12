@@ -13,6 +13,22 @@ export interface CustomerDTO {
     street: string;
     zipCode: string;
 }
+export interface PaymentsDTO{ 
+    id: number;
+    invoiceId: number;
+    paymentDate : string;
+    status : string;
+}
+export interface  InvoiceDTO{ 
+    id: number;
+    invoiceId : number;
+    invoiceNumber: string;
+    dueDate: string;
+    grossPrice: number; 
+    paymentDate: string; 
+    paymentStatus : string;
+
+}
 export interface ResultsPage<T> {
     elements: T[];
     total: number;

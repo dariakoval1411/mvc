@@ -7,5 +7,6 @@ import { Component } from "@angular/core";
     styleUrls: ['./invoices.component.scss']
 })
 export class InvoicesComponent {
-
+ 
+   // displayedColumns: string[] =['id','invoiceNumber','issueDate','dueDate','grossPrice','description']
 }

@@ -1,9 +1,22 @@
-package pl.pw.mvc.entity;
+package pl.pw.mvc.model;
 
 import java.io.Serializable;
-import jakarta.persistence.*;
 import java.math.BigDecimal;
 import java.sql.Timestamp;
+import java.util.List;
+
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
+import jakarta.persistence.NamedQuery;
+import jakarta.persistence.OneToOne;
+import jakarta.persistence.SequenceGenerator;
+import jakarta.persistence.Table;
+
 
 /**
  * The persistent class for the invoices database table.
@@ -16,6 +29,8 @@ public class Invoice implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Id
+	@SequenceGenerator(name = "INVOICES_ID_GENERATOR", sequenceName = "INVOICES_SEQ", allocationSize = 1)
+	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "INVOICES_ID_GENERATOR")
 	private long id;
 
 	private String description;
@@ -28,6 +43,14 @@ public class Invoice implements Serializable {
 
 	@Column(name="invoice_number")
 	private String invoiceNumber;
+
+	public Payment getPayment() {
+		return payment;
+	}
+
+	public void setPayment(Payment payment) {
+		this.payment = payment;
+	}
 
 	@Column(name="issue_date")
 	private Timestamp issueDate;
@@ -48,8 +71,12 @@ public class Invoice implements Serializable {
 
 	//bi-directional many-to-one association to Customer
 	@ManyToOne
-	@JoinColumn(name="cust_id")
+	@JoinColumn(name="cust_id", nullable = false)
 	private Customer customer;
+
+	//bi-directional many-to-one association to Payment
+	@OneToOne(mappedBy="invoice")
+	private Payment payment;
 
 	public Invoice() {
 	}

@@ -13,7 +13,8 @@ import jakarta.inject.Inject;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.PersistenceContext;
 import pl.pw.mvc.dto.CustomerDTO;
-import pl.pw.mvc.entity.Customer;
+import pl.pw.mvc.model.Customer;
+import pl.pw.mvc.model.Invoice;
 import util.QueryBuilder;
 import util.ResultPage;
 
@@ -73,7 +74,7 @@ public class CustomerServiceImpl {
 	}
 
 	@TransactionAttribute(TransactionAttributeType.REQUIRED)
-	public void updateCustomer(Long id, CustomerDTO dto) throws Exception {
+	public CustomerDTO updateCustomer(Long id, CustomerDTO dto) throws Exception {
 		Customer customer = entityManager.find(Customer.class, id);
 		if (customer != null) {
 			customer.setName(dto.getName());
@@ -86,10 +87,11 @@ public class CustomerServiceImpl {
 		} else {
 			throw new Exception("Customer not found with id: " + dto.getId());
 		}
+		return dto;
 	}
 
 	@TransactionAttribute(TransactionAttributeType.REQUIRED)
-	public void createCustomer(CustomerDTO dto) throws Exception {
+	public CustomerDTO createCustomer(CustomerDTO dto) throws Exception {
 		Customer customer = new Customer();
 		customer.setName(dto.getName());
 		customer.setCity(dto.getCity());
@@ -98,6 +100,8 @@ public class CustomerServiceImpl {
 		customer.setStreet(dto.getStreet());
 
 		entityManager.persist(customer);
+		dto.setId(customer.getId());
+		return dto;
 	}
 
 	@TransactionAttribute(TransactionAttributeType.REQUIRED)
@@ -115,5 +119,13 @@ public class CustomerServiceImpl {
 				Object[].class).getResultList();
 
 		return results.stream().collect(Collectors.toMap(r -> (String) r[0], r -> (BigDecimal) r[1]));
+	}
+	
+	@TransactionAttribute(TransactionAttributeType.REQUIRED)
+	public List<Invoice> getInvoicesByCustomerId(Long customerId) {
+	    return entityManager.createQuery(
+	            "SELECT i FROM Invoice i WHERE i.customer.id = :customerId", Invoice.class)
+	        .setParameter("customerId", customerId)
+	        .getResultList();
 	}
 }

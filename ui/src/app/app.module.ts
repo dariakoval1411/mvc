@@ -4,11 +4,8 @@ import { FormsModule } from '@angular/forms';
 import { RouterModule, Routes } from '@angular/router';
 
 import { AppComponent } from './app.component';
-import { CalculateComponent } from './common/calculate/calculate.component';
-import { ToDoListComponent } from './common/to-do-list/to-do-list.component';
 import { routes } from './app.routing.module';
 import {  HttpClientModule } from '@angular/common/http';
-import { QuotesComponent } from './common/quotes/quotes.component';
 import {MatToolbarModule} from '@angular/material/toolbar';
 import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatListModule } from '@angular/material/list';
@@ -29,18 +26,18 @@ import { MatSortModule } from '@angular/material/sort';
 import { MatDialogModule } from '@angular/material/dialog';
 import { ReactiveFormsModule } from '@angular/forms';
 import {CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
+import { PaymentsComponent } from './payments/payments.component';
+
 
 @NgModule({
     declarations: [
       AppComponent,
-      CalculateComponent,
-      ToDoListComponent,
-      QuotesComponent,
       MenuSideComponent, 
       MenuBreadcrumbComponent,
       CustomersComponent,
       ChartsComponent,
-      InvoicesComponent
+      InvoicesComponent,
+      PaymentsComponent
     ],
     imports: [
       BrowserModule,
@@ -48,7 +45,6 @@ import {CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
       HttpClientModule,
       MatToolbarModule,
       MatSidenavModule,
-      MatListModule,
       MatIconModule,
       MatButtonModule,
       BrowserAnimationsModule,

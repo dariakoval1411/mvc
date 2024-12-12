@@ -3,8 +3,8 @@ package pl.pw.mvc.dto;
 import java.util.List;
 import java.util.stream.Collectors;
 
-import pl.pw.mvc.entity.Customer;
-import pl.pw.mvc.entity.Invoice;
+import pl.pw.mvc.model.Customer;
+import pl.pw.mvc.model.Invoice;
 
 public class CustomerDTO {
 	private long id;
