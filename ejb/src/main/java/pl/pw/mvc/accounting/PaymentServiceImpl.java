@@ -33,19 +33,8 @@ public class PaymentServiceImpl {
 		Payment payment = new Payment();
 		payment.setInvoice(invoice);
 		payment.setPaymentDate(dto.getPaymentDate());
-		payment.setStatus("Pay");
 
 		entityManager.persist(payment);
-		return payment;
-	}
-
-	public Payment updatePayment(Long paymentId, String status) throws Exception {
-		Payment payment = entityManager.find(Payment.class, paymentId);
-		if (payment == null) {
-			throw new Exception("Payment not found with ID: " + paymentId);
-		}
-		payment.setStatus(status);
-		entityManager.merge(payment);
 		return payment;
 	}
 }

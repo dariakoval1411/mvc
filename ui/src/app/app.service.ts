@@ -51,10 +51,13 @@ export class AppService {
     public getInvoicesByCustomerId(customerId: number): Observable<InvoiceDTO[]>{
         return this.httpClient.get<InvoiceDTO[]>(`/api/ac/customers/${customerId}/invoices`);
     }
-    getListPyaments():Observable<PaymentsDTO[]>{
+    public getListPyaments():Observable<PaymentsDTO[]>{
         return this.httpClient.get<PaymentsDTO[]>(`/api/fi`);
     }
-    updatePayment(paymentId: number, payment: Partial<PaymentsDTO>): Observable<void>{
+    public updatePayment(paymentId: number, payment: Partial<PaymentsDTO>): Observable<void>{
         return this.httpClient.put<void>(`/api/fi/${paymentId}`, payment);
+    }
+    public getListInvoices(): Observable<InvoiceDTO[]>{
+        return this.httpClient.get<InvoiceDTO[]>(`/api/fi/invoice`);
     }
 }

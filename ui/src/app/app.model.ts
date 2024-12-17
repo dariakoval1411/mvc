@@ -27,7 +27,6 @@ export interface  InvoiceDTO{
     grossPrice: number; 
     paymentDate: string; 
     paymentStatus : string;
-
 }
 export interface ResultsPage<T> {
     elements: T[];

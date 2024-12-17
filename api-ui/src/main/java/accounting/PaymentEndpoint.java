@@ -38,8 +38,8 @@ public class PaymentEndpoint {
 			Payment payment = paymentService.createPayment(dto);
 			PaymentDTO paymentNotification = new PaymentDTO(payment);
 
-			PaymentWebSocketEndpoint.broadcast("New payment created: " + paymentNotification.getInvoiceId()
-					+ ", Status: " + paymentNotification.getStatus());
+			PaymentWebSocketEndpoint.broadcast("New payment created: " + paymentNotification.getId() + "invoice id: "
+					+ paymentNotification.getInvoiceId());
 
 			return Response.ok(new PaymentDTO(payment)).build();
 		} catch (Exception e) {
@@ -48,22 +48,6 @@ public class PaymentEndpoint {
 		}
 	}
 
-	@PUT
-	@Path("/{paymentId}")
-	@Consumes(MediaType.APPLICATION_JSON)
-	@Produces(MediaType.APPLICATION_JSON)
-	public Response updatePayment(@PathParam("paymentId") Long paymentId, PaymentDTO dto) {
-		try {
-			Payment updatePay = paymentService.updatePayment(paymentId, dto.getStatus());
-			PaymentDTO paymentNotification = new PaymentDTO(updatePay);
-			PaymentWebSocketEndpoint.broadcast("Payment status updated: ID " + paymentNotification.getId()
-					+ ", Status: " + paymentNotification.getStatus());
-			return Response.ok(new PaymentDTO(updatePay)).build();
-		} catch (Exception e) {
-			return Response.status(Response.Status.INTERNAL_SERVER_ERROR)
-					.entity("Error updating payment: " + e.getMessage()).build();
-		}
-	}
 	@GET
 	@Path("/invoice")
 	@Produces(MediaType.APPLICATION_JSON)

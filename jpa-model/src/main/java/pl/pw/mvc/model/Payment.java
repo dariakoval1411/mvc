@@ -33,9 +33,6 @@ public class Payment implements Serializable {
 	@Column(name="payment_date")
 	private Timestamp paymentDate;
 	
-	@Column(name="status",nullable = false)
-	private String status;
-	
 	//bi-directional many-to-one association to Invoice
 	@OneToOne
 	@JoinColumn(name="invo_id")
@@ -66,14 +63,6 @@ public class Payment implements Serializable {
 
 	public void setInvoice(Invoice invoice) {
 		this.invoice = invoice;
-	}
-	
-	public String getStatus() {
-	    return status;
-	}
-
-	public void setStatus(String status) {
-	    this.status = status;
 	}
 
 }

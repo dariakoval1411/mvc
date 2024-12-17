@@ -18,8 +18,9 @@ export class MenuSideComponent {
       { link: '/' }
     ],
     [
+      { link: '/payments' },
       { link: '/invoices' },
-      { link: '/charts' } 
+      { link: '/charts' }
     ],
   ];
 

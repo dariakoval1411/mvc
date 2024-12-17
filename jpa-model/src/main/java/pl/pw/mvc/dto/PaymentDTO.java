@@ -8,14 +8,11 @@ public class PaymentDTO {
 	private Long id;
 	private Long invoiceId;
 	private Timestamp paymentDate;
-	//private String description;
-	private String status;
 
 	public PaymentDTO(Payment payment) {
 		this.id = payment.getId();
 		this.invoiceId = payment.getInvoice().getId();
 		this.paymentDate = payment.getPaymentDate();
-		this.status = payment.getStatus();
 	}
 
 	public PaymentDTO() {
@@ -43,21 +40,5 @@ public class PaymentDTO {
 
 	public void setPaymentDate(Timestamp paymentDate) {
 		this.paymentDate = paymentDate;
-	}
-
-//	public String getDescription() {
-//		return description;
-//	}
-//
-//	public void setDescription(String description) {
-//		this.description = description;
-//	}
-
-	public String getStatus() {
-		return status;
-	}
-
-	public void setStatus(String status) {
-		this.status = status;
 	}
 }
